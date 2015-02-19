@@ -1,0 +1,33 @@
+<% flash.each do |key, value| %>
+  <div class="<%= flash_class(key) %>">
+    <a href="#" data-dismiss="alert" class="close">×</a>
+    <%= value %>
+  </div>
+<% end %>
+<% if current_user %>
+<p class="text-success">
+  <%= current_user.name %> 谢谢你登录了我们网站！你已经登录了 <%= current_user.sign_in_count %> 次了，总共登录时间是 {M} 分钟了。
+</p>
+<% else %>
+<p class="text-success">
+  你好，陌生人！你没有登录，或者你还没有注册，但是你已经浏览这个页面<em id="stay_m">0</em>分钟了。
+</p>
+<% end %>
+
+<%= content_for :page_javascript do %>
+<script type="text/javascript">
+  var second = 0;
+  var minute = 0;
+  var hour = 0;
+  window.setInterval("OnlineStayTime();", 1000);
+  function OnlineStayTime() {
+    second++;
+    if (second == 60) {
+      second = 0;
+      minute++;
+    }
+    // window.status = "停留时间" + hour + ":" + minute + ":" + second;
+    $('#stay_m').text(minute);
+  }
+</script>
+<% end %>

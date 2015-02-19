@@ -8,7 +8,20 @@
 </head>
 <body>
 
-<%= yield %>
+  <% if user_signed_in? %>
+    <%= render "layouts/header" %>
+  <% else %>
+    <%= render "layouts/sign_in" %>
+  <% end %>
 
+  <div class="container">
+    <%= render "layouts/flash" %>
+
+    <%= yield %>
+
+  </div> <!-- /container -->
+
+  <%= render "layouts/footer" %>
+  <%= yield :page_javascript %>
 </body>
 </html>

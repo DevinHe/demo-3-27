@@ -44,3 +44,9 @@ group :development, :test do
   gem 'spring'
 end
 
+# 用户系统
+gem 'devise', '~> 3.4.1'
+
+gem 'bootstrap-sass', '~> 3.3.3'
+
+gem 'simple_form', '~> 3.1.0'
