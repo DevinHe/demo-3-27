@@ -61,6 +61,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_minutes
+    if params[:minutes]
+      temp = params[:minutes].to_i
+      if temp > @user.sign_in_minutes
+        @user.sign_in_minutes = params[:minutes].to_i
+        @user.save!
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

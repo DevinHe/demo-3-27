@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  post '/users/update_minutes' => 'users#update_minutes'
+
   resources :users
 
   root 'welcome#home'
