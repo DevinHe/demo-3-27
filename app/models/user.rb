@@ -5,5 +5,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true, uniqueness: true
 
-  # attr_accessor :login
+  attr_accessor :login
+
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
+
 end
