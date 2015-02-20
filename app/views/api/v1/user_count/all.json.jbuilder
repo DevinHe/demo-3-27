@@ -1,4 +1,4 @@
-{
-  login_count: @loginers,
-  guest_count: @guests
-}
+json.user do
+  json.login_count @loginers
+  json.guest_count @guests
+end
