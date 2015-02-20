@@ -25,12 +25,15 @@
     if (second == 60) {
       second = 0;
       minute++;
+
+      var temp = parseInt($('#stay_m').text());
+      if (temp) {
+        $('#stay_m').text(temp+minute);
+      }
+      else {
+        $('#stay_m').text(minute);
+      }
     }
-    var temp = $('#stay_m').val();
-    if (parseInt(temp))
-      $('#stay_m').text(minute);
-    else
-      $('#stay_m').text(temp+minute);
   }
   $(document).ready(function(){
     window.onbeforeunload = function(){

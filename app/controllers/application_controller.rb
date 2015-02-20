@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
     def log_user_access
       if current_user
-        $redis.zadd :login_users, Time.now.to_i, session[:session_id]
+        $redis.zadd :login_users, Time.now.to_i, session[:user_id]
       else
         $redis.zadd :guest_users, Time.now.to_i, session[:session_id]
       end

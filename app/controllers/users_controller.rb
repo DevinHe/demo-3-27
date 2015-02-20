@@ -62,12 +62,16 @@ class UsersController < ApplicationController
   end
 
   def update_minutes
+    @user = current_user
     if params[:minutes]
       temp = params[:minutes].to_i
       if temp > @user.sign_in_minutes
         @user.sign_in_minutes = params[:minutes].to_i
         @user.save!
       end
+    end
+    respond_to do |format|
+      format.json { head :no_content }
     end
   end
 
