@@ -37,8 +37,8 @@
       $.ajax({
         method: "POST",
         url: "/users/update_minutes",
-        data: { minutes: $('#stay_m').text(minute) }
-      })
+        data: { minutes: $('#stay_m').text() }
+      });
     }
   })
 </script>
