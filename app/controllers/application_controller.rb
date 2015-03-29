@@ -29,17 +29,20 @@ class ApplicationController < ActionController::Base
   private
     def log_user_access
       if current_user
-        $redis.zadd :login_users, Time.now.to_i, session[:user_id]
+        $redis.zadd :login_users, Time.now.to_i, current_user.id
       else
         $redis.zadd :guest_users, Time.now.to_i, session[:session_id]
       end
     end
 
     def login_users_count
+      $redis.zremrangebyscore :login_users,"-inf",6.minutes.ago.to_i
       $redis.zcount :login_users, 5.minutes.ago.to_i, Time.now.to_i
+
     end
 
     def guest_users_count
+      $redis.zremrangebyscore :guest_users,"-inf",6.minutes.ago.to_i
       $redis.zcount :guest_users, 5.minutes.ago.to_i, Time.now.to_i
     end
 end
