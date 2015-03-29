@@ -1,17 +1,3 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
 ### README
 
 #### 这是一个简单的Demo项目，实现了一个基本的有数据库支持的网站。[在线Demo](http://oa.sccsa.org.cn:3000/)
