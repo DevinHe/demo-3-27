@@ -1,9 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<table class="table table-bordered">
+  <tbody>
+  <tr>
+    <th scope="row">Name:</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <% if @user.email.present? %>
+    <tr>
+      <th scope="row">Email:</th>
+      <td><%= @user.email %></td>
+    </tr>
+  <% end %>
+</tbody>
