@@ -3,47 +3,39 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
+    @user2 = users(:two)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create user" do
-    assert_difference('User.count') do
-      post :create, user: { name: @user.name }
-    end
-
-    assert_redirected_to user_path(assigns(:user))
+  test "should not allow annoymous access show" do
+    get :show, id: @user
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
   end
 
   test "should show user" do
+    sign_in @user
     get :show, id: @user
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @user
-    assert_response :success
+  test "should not allow annoymous access update_minutes" do
+    post :update_minutes, minutes: 5
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
   end
 
-  test "should update user" do
-    patch :update, id: @user, user: { name: @user.name }
-    assert_redirected_to user_path(assigns(:user))
+  test "should update user(one) sign_in_minutes" do
+    sign_in @user
+    post :update_minutes, minutes: 5, format: :json
+    @user.reload
+    assert_equal 5, @user.sign_in_minutes
   end
 
-  test "should destroy user" do
-    assert_difference('User.count', -1) do
-      delete :destroy, id: @user
-    end
-
-    assert_redirected_to users_path
+  test "should not update user(two) sign_in_minutes" do
+    sign_in @user2
+    post :update_minutes, minutes: 5, format: :json
+    @user2.reload
+    assert_equal 10, @user2.sign_in_minutes
   end
+
 end

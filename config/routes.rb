@@ -8,12 +8,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # post '/users/update_minutes' => 'users#update_minutes'
-
   resources :users, only: [:show] do
     post :update_minutes, on: :collection
   end
 
   root 'welcome#home'
 
+  match "*path", via: :all, to: "welcome#home"
 end

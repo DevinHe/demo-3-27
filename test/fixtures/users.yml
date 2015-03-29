@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-
+  name: Devin
+  encrypted_password: <%= Devise.bcrypt(User, '11111111') %>
+  sign_in_minutes: 0
 two:
-  name: MyString
+  name: Lina
+  email: 'lina@example.com'
+  encrypted_password: <%= Devise.bcrypt(User, '11111111') %>
+  sign_in_minutes: 10
