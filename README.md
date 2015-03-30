@@ -22,8 +22,12 @@ Note: 在线用户统计，默认为5分钟。
   mv config/database.yml.default config/database.yml
   mv config/secrets.yml.default config/secrets.yml
   rake db:setup
-  rake db:migrate
   rails s
 ```
+
+####TO DO LIST
+  * 添加国际化
+  * 将一些保密文件采用config_for形式加载参数
+
 ###License
 MIT.
