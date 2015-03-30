@@ -18,6 +18,7 @@
 <% end %>
 
 <%= content_for :page_javascript do %>
+<!-- 有个奇怪的现象，firefox上刷新时ajax无法成功发送post请求 -->
 <script type="text/javascript">
 $(document).ready(function(){
   var second = 0;
