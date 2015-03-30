@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
 
   private
     def log_user_access
+      return if session[:session_id] == ""
 
       if current_user
         $redis.zadd :login_users, Time.now.to_i, current_user.id
@@ -44,7 +45,7 @@ class ApplicationController < ActionController::Base
       if params[:controller] == "devise/registrations" && params[:action] == "create"
         $redis.zrem :guest_users, session[:session_id]
       elsif params[:controller] == "devise/sessions" && (params[:action] == "create" || params[:action] == "destroy")
-        $redis.zrem :login_users,current_user.id
+        $redis.zrem :login_users,current_user.id if current_user
         $redis.zrem :guest_users,session[:session_id]
       end
     end
