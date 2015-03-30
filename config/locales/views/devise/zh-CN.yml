@@ -1,0 +1,13 @@
+zh-CN:
+  devise:
+    sessions:
+      new:
+        login: 登录
+    shared:
+      links:
+        Sign up: 注册
+        Log in: 登录
+    registrations:
+      new:
+        Sign up: 注册
+        Log in: 登录

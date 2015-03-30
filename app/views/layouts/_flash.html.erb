@@ -19,29 +19,33 @@
 
 <%= content_for :page_javascript do %>
 <script type="text/javascript">
+$(document).ready(function(){
   var second = 0;
   var minute = 0;
-  window.setInterval("OnlineStayTime();", 1000);
-  function OnlineStayTime() {
-    second++;
-    if (second == 60) {
-      second = 0;
 
-      var temp = parseInt($('#stay_m').text());
-      temp++;
-      $('#stay_m').text(temp);
-    }
+  function OnlineStayTime() {
+    var temp = parseInt($('#stay_m').text());
+    temp++;
+    $('#stay_m').text(temp);
   }
+  setInterval(OnlineStayTime, 1000*60);
+
   <% if user_signed_in? %>
-    $(document).ready(function(){
-      window.onbeforeunload = function(){
-        $.ajax({
-          method: "POST",
-          url: "/users/update_minutes",
-          data: { minutes: $('#stay_m').text() }
-        });
-      }
-    })
+    function UpdateMinutes() {
+      minutes = $('#stay_m').text();
+      console.log(minutes);
+      $.ajax({
+        method: "POST",
+        url: "/users/update_minutes",
+        data: { minutes: minutes }
+      }).done(function(){
+        console.log('success');
+      });
+    }
+    $(window).on('beforeunload',function(){
+      UpdateMinutes();
+    });
   <% end %>
+})
 </script>
 <% end %>

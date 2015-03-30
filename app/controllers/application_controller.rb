@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :log_user_access
+  before_action :set_seo_meta
 
   def render_404
     render_optional_error_file(404)
@@ -17,6 +18,12 @@ class ApplicationController < ActionController::Base
            handler: [:erb], status: status, layout: 'application'
   end
 
+  def set_seo_meta(title = nil, meta_keywords = nil, meta_description = nil)
+    @page_title = title.nil? ? 'Trick Demo' : title
+    @meta_keywords = meta_keywords.nil? ? '用户登录、记录小Demo' : meta_keywords
+    @meta_description = meta_description.nil? ? '这是一个简单的Demo项目，实现了一个基本的有数据库支持的网站。' : meta_keywords
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -27,10 +34,18 @@ class ApplicationController < ActionController::Base
 
   private
     def log_user_access
+
       if current_user
         $redis.zadd :login_users, Time.now.to_i, current_user.id
       else
         $redis.zadd :guest_users, Time.now.to_i, session[:session_id]
+      end
+
+      if params[:controller] == "devise/registrations" && params[:action] == "create"
+        $redis.zrem :guest_users, session[:session_id]
+      elsif params[:controller] == "devise/sessions" && (params[:action] == "create" || params[:action] == "destroy")
+        $redis.zrem :login_users,current_user.id
+        $redis.zrem :guest_users,session[:session_id]
       end
     end
 

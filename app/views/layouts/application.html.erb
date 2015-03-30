@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Trick</title>
+  <title><%= @page_title %></title>
+  <meta charset='utf-8' />
+  <meta name="keywords" content="<%= @meta_keywords %>" />
+  <meta name="description" content="<%= @meta_description %>" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <!-- header -->
   <% if user_signed_in? %>
     <%= render "layouts/header" %>
   <% else %>
     <%= render "layouts/sign_in" %>
   <% end %>
+  <!-- /header -->
 
+  <!-- container -->
   <div class="container">
     <%= render "layouts/flash" %>
     <%= yield %>
   </div> <!-- /container -->
 
+  <!-- footer -->
   <%= render "layouts/footer" %>
+  <!-- /footer -->
+
+  <!-- bottom javascript -->
   <%= yield :page_javascript %>
+  <!-- /bottom javascript -->
 </body>
 </html>

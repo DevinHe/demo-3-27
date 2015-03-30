@@ -55,16 +55,5 @@ zh-CN:
       not_saved:
         one: '因为1个错误导致此%{resource}保存失败:'
         other: '因为%{count}个错误导致此%{resource}保存失败:'
-  devise:
-    sessions:
-      new:
-        login: 登录
-    shared:
-      links:
-        Sign up: 注册
-        Log in: 登录
-    registrations:
-      new:
-        Sign up: 注册
-        Log in: 登录
+
 
