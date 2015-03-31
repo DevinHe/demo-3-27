@@ -14,7 +14,10 @@
 
 Note: 在线用户统计，默认为5分钟。
 
-####使用方法
+#####依赖
+* redis（localhost:6379,可通过修改config/initializers/redis_connection.rb来配置）
+
+#####使用方法
 ```
   git clone git@github.com:DevinHe/demo-3-27.git
   cd demo-3-27
@@ -25,10 +28,10 @@ Note: 在线用户统计，默认为5分钟。
   rails s
 ```
 
-####TO DO LIST
+#####TO DO LIST
   * 完善测试用例
   * 添加国际化
   * 将一些保密文件采用config_for形式加载参数
 
-###License
+#####License
 MIT.
