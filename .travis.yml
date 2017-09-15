@@ -8,8 +8,3 @@ before_install:
 group: stable
 dist: trusty
 os: linux
-test:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/test.sqlite3
